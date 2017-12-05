@@ -8,7 +8,7 @@
   - name: "PROVISION | Create VM from template"
     vmware_guest:
       hostname: "ma1vc8.platformlab.ibm.com"
-      username: "vmod"
+      username: "vmod@vsphere.local"
       password: "VMoD+user4321"
       validate_certs: false
       datacenter: "Markham Lab"
