@@ -1,0 +1,33 @@
+---
+# Create a new VM from a template
+
+- hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+  - name: "PROVISION | Create VM from template"
+    vmware_guest:
+      hostname: "ma1vc8.platformlab.ibm.com"
+      username: "vmod"
+      password: "VMoD+user4321"
+      validate_certs: false
+      datacenter: "Markham Lab"
+      cluster: "VM onDemand"
+      resource_pool: khuang2
+      name: vmod-demo1
+      template: "rhel-server-7.1-x64-base"
+      linked_clone: yes
+      snapshot_src: current
+      wait_for_ip_address: true
+      annotation: "Deployed by Ansible Tower"
+      networks:
+      - name: "VM Network 49"
+        ip: 9.21.49.226
+        netmask: 255.255.255.0
+        gateway: 9.21.49.2
+      customization:
+        dns_servers:
+        - 9.21.48.111
+        - 9.21.48.112
+        domain: platformlab.ibm.com
+    register: deploy
